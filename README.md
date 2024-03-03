@@ -1,8 +1,8 @@
-**// Kevin Le - KHL0041 - KevinLe2@my.unt.edu
+**Kevin Le - KHL0041 - KevinLe2@my.unt.edu**
 
-// CSCE 3550 - Foundations of Cyber Security
+**CSCE 3550 - Foundations of Cyber Security**
 
-// Project 1 - Basic JWKS Server**
+**Project 1 - Basic JWKS Server**
   
 // This is a basic RESTful JWKS server developed in GO featuring an //
 
