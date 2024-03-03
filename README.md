@@ -22,6 +22,7 @@ OR
 >go run auth.go main.go keys.go
 
 **Test Client**
+
 Make sure you run the test client on a separate IDE or Terminal instance!
 
 > go run test.go
