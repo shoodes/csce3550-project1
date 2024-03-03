@@ -6,8 +6,7 @@ import (
 	"net/http"
 	"strconv"
 	"time"
-
-	"github.com/golang-jwt/jwt" // Ensure you're using the correct version
+	"github.com/golang-jwt/jwt" 
 )
 
 /*
@@ -33,16 +32,16 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	var signingKey *rsa.PrivateKey
 	var kid string
 
-	// Choose the key based on the 'expired' query parameter
+	// key chosen based on 'expiry parameters'
 	if expired {
-		signingKey = expiredPrivateKey // Use the globally defined expired key
-		kid = "expiredKeyID"           // A static ID for the expired key, adjust as needed
+		signingKey = expiredPrivateKey // expired key definition
+		kid = "expiredKeyID"           // static id for expired keys
 	} else {
-		signingKey = AuthorizedPrivateKey // Use the globally defined good key
-		kid = authorizedKID               // Use the static ID for the good key
+		signingKey = AuthorizedPrivateKey // good key definition
+		kid = authorizedKID               // static id for good key!
 	}
 
-	// Create a new token with the specified claims, including the dynamic expiration
+	// token creation with claims, with expirations / validations
 	claims := jwt.MapClaims{
 		"iss": "jwks-server",
 		"sub": "user123",
@@ -56,14 +55,14 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	token := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
 	token.Header["kid"] = kid
 
-	// Sign the token
+	// signing token
 	tokenString, err := token.SignedString(signingKey)
 	if err != nil {
 		http.Error(w, "Failed to sign token", http.StatusInternalServerError)
 		return
 	}
 
-	// Respond with the token
+	// token response
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]string{"token": tokenString})
 }
